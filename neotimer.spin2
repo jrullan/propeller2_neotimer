@@ -136,6 +136,23 @@ PUB done() : result    'Returns true if timer is done
 
 
 '=========================================================
+PUB done_one_shot() : result
+'Returns true if timer is done just once
+'=========================================================
+  if(is_done OR NOT is_started)
+    result := false
+    return
+
+  if(getms()-last >= time)
+    is_done := true
+    is_waiting := false
+    result := true
+    return
+
+  result := false
+
+
+'=========================================================
 PUB repeat_execution() : result
 { Returns true if timer is done, and resets it
   Used to repeat the execution of some code indefinetely }
